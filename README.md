@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/christianbennett/C22-PC405_Capstone-Project">
-    <img src="" width='400dp' alt="Logo" >
+    <img src="https://cdn.discordapp.com/attachments/297540129596243969/974302036860489738/TrashifierLogo.png" width='400dp' alt="Logo" >
   </a>
 
   <h3 align="center">Trashifier</h3>
