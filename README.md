@@ -33,7 +33,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## About the Project
 
 Our project, Trashifier, is a simple application that can sort trash using Image Classification. It can classify a trash image into 9 categories, which are: Alumunium, Carton, Glass, Organic Waste, Other Plastics, Paper and Cardboard, Plastic, Textiles and Wood. We are trying to attempt to solve one of Indonesia’s biggest problems, which is sorting wastes. How can we classify and sort wastes efficiently?
 
