@@ -1,1 +1,0 @@
-test/assets/buckettest.jpg
