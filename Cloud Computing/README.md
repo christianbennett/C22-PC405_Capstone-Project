@@ -44,4 +44,6 @@ gcloud run deploy --image gcr.io/trashifier-350110/index --platform managed
 - Click 'Choose File' and input your image
 - The server will return a `.json` with the prediction number and label
 
+![Postman](!(Postman demo)[https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Cloud%20Computing/postman.png])
+
 Services are deployed at https://trashify-tklllz773q-et.a.run.app
