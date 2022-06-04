@@ -22,7 +22,7 @@ The model will predict the inputted image and return a label output on a TextVie
 
 We use TextToSpeech so that the app can speak the label output.
 
-![](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/appdemo2.mov)
+![App demo](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/appdemo2.mov)
 
 # Adding custom .tflite model
 
