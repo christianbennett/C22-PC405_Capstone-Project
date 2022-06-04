@@ -112,25 +112,25 @@ https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/
 
 ## Cloud Computing Documentation
 
-### 1. Write App (Flask, TensorFlow)
+### Write Flask App
 
 - Codes needed to test are in the `test/` directory.
 - Load the `.h5` model in `main.py`
 
-### 2. Setup Google Cloud
+### Setup Google Cloud
 
 - Create new project (Trashifier)
 - Enable Cloud Run API and Cloud Build API
 
-### 3. Install and init Google Cloud SDK
+### Install and init Google Cloud SDK
 
 - https://cloud.google.com/sdk/docs/install
 
-### 4. Dockerfile, requirements.txt, .dockerignore
+### Dockerfile, requirements.txt, .dockerignore
 
 - https://cloud.google.com/run/docs/quickstarts/build-and-deploy#containerizing
 
-### 5. Cloud build & deploy
+### Cloud build & deploy
 
 - Build the application and upload it to Google Cloud with this code:
 
