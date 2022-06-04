@@ -45,9 +45,120 @@ In the future, the Internet of Things concept could be implemented on this proje
 
 ## Machine Learning Documentation
 
+### Importing Libraries
+
+All the libraries needed to run this notebook are imported here.
+
+### Data Preprocessing
+
+The dataset used on this project can be accessed <a href="https://console.cloud.google.com/storage/browser/trashifier-bucket-1/TrashData?walkthrough_id=assistant_generic_index&project=trashifier-350110&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false">here</a>.
+Google Drive and Google Cloud Platform is mounted here to access and upload datas. We also split the dataset into training and validation sets with 80:20 split. The data is then augmented with ImageDataGenerator to reduce overfitting.
+
+References for our dataset:
+
+https://github.com/cardstdani/WasteClassificationNeuralNetwork/tree/main/WasteImagesDataset
+
+https://github.com/garythung/trashnet
+
+https://github.com/AgaMiko/waste-datasets-review
+
+### Creating & Training the Model
+
+Our model will be consisting of Convolutional Neural Network (CNN), Max Pooling, Dropout, Flatten, and Dense Layers. We are using CNN followed by MaxPooling to extract important features from each class of images. We are also using Dropout to reduce overfitting from the dataset. The model is then Flattened and after that Densed into 9 classes with the Softmax activation function.
+
+Our model is compiled with Adam optimizer with 0.001 learning rate, it also uses Categorical Crossentropy as the loss function and accuracy as metric. It is also trained with 30 epochs and uses a ModelCheckpoint callback function to save and load the best model.
+
+### Predicting the Model
+
+Here we can input images to test our own image against the model. Currently our best model has 84.26% training accuracy and 70.17% validation accuracy. Not great, but still decent.
+
+### Saving the Model
+
+Lastly, we save our model in `.h5` format so that it can be used again later on without retraining the model since it takes quite a lot of time (~2 minutes per epoch with 40 epochs). We also convert the saved model into `.tflite` format so that it can be used in Mobile Development.
+
 ## Mobile Development Documentation
 
+### Features
+
+#### Splash Screen
+
+Our app features a Splash Screen in which the duration can be modified. Currently it's at 2.5 seconds.
+
+![Splash Screen](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/splash.png)
+
+#### Inputting image
+
+You can input image to be predicted from your Image Gallery.
+
+![Input Image Screen](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/image.png)
+
+#### Predicting image
+
+The model will predict the inputted image and return a label output on a TextView.
+
+![Prediction Screen](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/predict.png)
+
+#### Speaking image classification labels
+
+We use TextToSpeech so that the app can speak out the label output.
+
+#### Adding custom .tflite model
+
+To run, add `model.tflite` file to `Trashifier/app/src/main/ml`, or input via Android Studio with with File -> New -> Other -> Tensorflow Lite Model -> input `model.tflite` path -> Finish
+
+### App Demo
+
+https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/demo.gif
+
 ## Cloud Computing Documentation
+
+### 1. Write App (Flask, TensorFlow)
+
+- Codes needed to test are in the `test/` directory.
+- Load the `.h5` model in `main.py`
+
+### 2. Setup Google Cloud
+
+- Create new project (Trashifier)
+- Enable Cloud Run API and Cloud Build API
+
+### 3. Install and init Google Cloud SDK
+
+- https://cloud.google.com/sdk/docs/install
+
+### 4. Dockerfile, requirements.txt, .dockerignore
+
+- https://cloud.google.com/run/docs/quickstarts/build-and-deploy#containerizing
+
+### 5. Cloud build & deploy
+
+- Build the application and upload it to Google Cloud with this code:
+
+```
+gcloud builds submit --tag gcr.io/trashifier-350110/index
+```
+
+- Deploy the application with this code:
+
+```
+gcloud run deploy --image gcr.io/trashifier-350110/index --platform managed
+```
+
+### 6. Testing
+
+- Copy the URL to `test/test.py` to connect with the deployed app.
+- Test the code with `test/test.py` with images to test the model.
+
+### 7. Testing (via Postman)
+
+- Copy the URL to Postman
+- Choose POST as the method
+- Choose Body->form-data
+- Find the File dropdown and choose 'File'
+- Click 'Choose File' and input your image
+- The server will return a `.json` with the prediction number and label
+
+Services are deployed at https://trashify-tklllz773q-et.a.run.app
 
 ## Contributors
 
@@ -56,6 +167,5 @@ In the future, the Internet of Things concept could be implemented on this proje
 - (ML) M2004F0310 - Christian Bennett Robin - Institut Teknologi Sepuluh Nopember
 - (ML) M2283F2437 - Melisa Kartika Sari - Universitas Negeri Semarang
 - (ML) M2381G2931 - Ade Ridwan Nugraha - Universitas Jenderal Achmad Yani
-- (MD) A2010H1101 - Muhammad Zuhri Bayhaqi - Universitas Indonesia
 - (CC) C2441W3044 - Naufal Hayyu Triwardana - Universitas Islam Negeri Maulana Malik Ibrahim Malang
 - (CC) C7004F0162 - Agustin Umul Hasanah - Institut Teknologi Sepuluh Nopember
