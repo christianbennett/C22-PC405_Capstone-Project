@@ -25,3 +25,7 @@ We use TextToSpeech so that the app can speak out the label output.
 # Adding custom .tflite model
 
 To run, add `model.tflite` file to `Trashifier/app/src/main/ml`, or input via Android Studio with with File -> New -> Other -> Tensorflow Lite Model -> input `model.tflite` path -> Finish
+
+# App Demo
+
+![Demo](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/demo.gif)
