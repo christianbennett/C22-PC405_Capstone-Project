@@ -1,4 +1,4 @@
-# Write App (Flask, TensorFlow)
+# Write Flask App
 
 - Codes needed to test are in the `test/` directory.
 - Load the `.h5` model in `main.py`
