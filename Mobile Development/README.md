@@ -28,4 +28,4 @@ To run, add `model.tflite` file to `Trashifier/app/src/main/ml`, or input via An
 
 # App Demo
 
-![Demo](https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/demo.gif)
+https://github.com/christianbennett/C22-PC405_Capstone-Project/blob/main/Assets/demo.gif
