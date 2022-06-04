@@ -144,12 +144,12 @@ gcloud builds submit --tag gcr.io/trashifier-350110/index
 gcloud run deploy --image gcr.io/trashifier-350110/index --platform managed
 ```
 
-### 6. Testing
+### Testing
 
 - Copy the URL to `test/test.py` to connect with the deployed app.
 - Test the code with `test/test.py` with images to test the model.
 
-### 7. Testing (via Postman)
+### Testing (via Postman)
 
 - Copy the URL to Postman
 - Choose POST as the method
