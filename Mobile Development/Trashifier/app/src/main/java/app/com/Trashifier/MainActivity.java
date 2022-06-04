@@ -1,8 +1,3 @@
-/*
- * Created by ishaanjav
- * github.com/ishaanjav
- */
-
 package app.com.Trashifier;
 
 import androidx.annotation.Nullable;
@@ -14,6 +9,7 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +22,7 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Locale;
 
 import app.com.Trashifier.ml.Model;
 
@@ -33,19 +30,33 @@ import app.com.Trashifier.ml.Model;
 public class MainActivity extends AppCompatActivity {
 
     Button gallery;
+    Button button2;
     ImageView imageView;
     TextView result;
+    TextToSpeech textToSpeech;
     int imageSize = 150;
+    String[] classes = {"Aluminium", "Carton", "Glass", "Organic Waste", "Other Plastics", "Paper and Cardboard", "Plastic", "Textiles", "Wood"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gallery = findViewById(R.id.button);
+        getSupportActionBar().hide();
 
+        gallery = findViewById(R.id.button);
         result = findViewById(R.id.result);
+        button2 = findViewById(R.id.button2);
         imageView = findViewById(R.id.imageView);
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i!=TextToSpeech.ERROR){
+                    textToSpeech.setLanguage(Locale.UK);
+                }
+            }
+        });
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +65,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, 1);
             }
         });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textToSpeech.speak(result.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 
     public void classifyImage(Bitmap image){
         try {
             Model model = Model.newInstance(getApplicationContext());
 
-            // Creates inputs for reference.
+            // Create inputs for reference
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, imageSize, imageSize, 3}, DataType.FLOAT32);
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
@@ -68,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             int[] intValues = new int[imageSize * imageSize];
             image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
             int pixel = 0;
-            //iterate over each pixel and extract R, G, and B values. Add those values individually to the byte buffer.
+            // Iterate over each pixel and extract R, G, and B values. Add those values individually to the byte buffer
             for(int i = 0; i < imageSize; i ++){
                 for(int j = 0; j < imageSize; j++){
                     int val = intValues[pixel++]; // RGB
@@ -80,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
 
             inputFeature0.loadBuffer(byteBuffer);
 
-            // Runs model inference and gets result.
+            // Run model inference and gets result
             Model.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
             float[] confidences = outputFeature0.getFloatArray();
-            // find the index of the class with the biggest confidence.
+            // Find the index of the class with the biggest confidence
             int maxPos = 0;
             float maxConfidence = 0;
             for (int i = 0; i < confidences.length; i++) {
@@ -94,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Aluminium", "Carton", "Glass", "Organic Waste", "Other Plastics", "Paper and Cardboard", "Plastic", "Textiles", "Wood"};
 
             result.setText(classes[maxPos]);
 
-            // Releases model resources if no longer used.
+            // Release model resources if no longer used
             model.close();
+
         } catch (IOException e) {
             // TODO Handle the exception
         }
@@ -132,4 +150,5 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
