@@ -78,6 +78,15 @@ Lastly, we save our model in `.h5` format so that it can be used again later on 
 
 ## Mobile Development Documentation
 
+### How to Use
+
+1. Open App.
+2. Wait till Splash Screen duration is over.
+3. Press "Select Image" Button to select an image from the Gallery.
+4. Select the desired image from the Gallery.
+5. The application will tell you what it classifies the image into.
+6. Press "Speak" to speak out the image label.
+
 ### Features
 
 #### Splash Screen
