@@ -176,7 +176,5 @@ Services are deployed at https://trashify-tklllz773q-et.a.run.app
 ### C22-PC405
 
 - (ML) M2004F0310 - Christian Bennett Robin - Institut Teknologi Sepuluh Nopember
-- (ML) M2283F2437 - Melisa Kartika Sari - Universitas Negeri Semarang
 - (ML) M2381G2931 - Ade Ridwan Nugraha - Universitas Jenderal Achmad Yani
-- (CC) C2441W3044 - Naufal Hayyu Triwardana - Universitas Islam Negeri Maulana Malik Ibrahim Malang
 - (CC) C7004F0162 - Agustin Umul Hasanah - Institut Teknologi Sepuluh Nopember
